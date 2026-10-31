@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manage Products | Atelier Anya</title>
+
+    <link rel="stylesheet" href="products.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="admin-layout">
+      <aside class="sidebar">
+        <a href="index.html" class="brand">Atelier Anya</a>
+
+        <p class="sidebar-label">ADMIN MENU</p>
+
+        <nav class="sidebar-nav">
+          <a href="index.html">
+            <i class="fa-solid fa-chart-pie"></i>
+            <span>Overview</span>
+          </a>
+
+          <a href="orders.html">
+            <i class="fa-solid fa-box"></i>
+            <span>Orders</span>
+          </a>
+
+          <a href="products.html" class="active">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Products</span>
+          </a>
+
+          <a href="customers.html">
+            <i class="fa-solid fa-users"></i>
+            <span>Customers</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-bottom">
+          <a href="../index.html">
+            <i class="fa-solid fa-store"></i>
+            <span>Visit Store</span>
+          </a>
+
+          <button type="button" id="logoutButton" class="logout-button">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Logout</span>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">STORE MANAGEMENT</p>
+            <h1>Manage Products</h1>
+            <p class="page-description">
+              Manage your store's products, pricing and availability.
+            </p>
+          </div>
+
+          <div class="admin-profile">
+            <span class="admin-avatar">
+              <i class="fa-solid fa-user-shield"></i>
+            </span>
+            <div>
+              <p class="admin-name">Administrator</p>
+              <p class="admin-role">Store Admin</p>
+            </div>
+          </div>
+        </header>
+
+        <section class="summary-grid">
+          <article class="summary-card">
+            <div class="summary-icon">
+              <i class="fa-solid fa-boxes-stacked"></i>
+            </div>
+            <p>Total Products</p>
+            <h2 id="totalProducts">--</h2>
+            <span>Products in your store</span>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-icon">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <p>In Stock</p>
+            <h2 id="inStockProducts">0</h2>
+            <span>Available for purchase</span>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-icon warning-icon">
+              <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <p>Low Stock</p>
+            <h2 id="lowStockProducts">0</h2>
+            <span>Products needing attention</span>
+          </article>
+
+          <article class="summary-card">
+            <div class="summary-icon danger-icon">
+              <i class="fa-solid fa-circle-xmark"></i>
+            </div>
+            <p>Out of Stock</p>
+            <h2 id="outOfStockProducts">0</h2>
+            <span>Currently unavailable</span>
+          </article>
+        </section>
+
+        <section class="products-section">
+          <div class="section-heading">
+            <div>
+              <h2>All Products</h2>
+              <p>View and manage the products in your store.</p>
+            </div>
+
+            <button type="button" id="addProductButton" class="primary-button">
+              <i class="fa-solid fa-plus"></i>
+              Add Product
+            </button>
+            
+
+          <div class="products-toolbar">
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="search"
+                id="productSearch"
+                placeholder="Search products..."
+                aria-label="Search products"
+              />
+            </div>
+            <button type="submit" id="searchButton">Search</button>
+            <div id="searchDisplay"></div>
+
+            <select id="categoryFilter" aria-label="Filter by category">
+              <option value="all">All Categories</option>
+              <option value="Skincare">Skincare</option>
+              <option value="Makeup">Makeup</option>
+              <option value="Fragrance">Fragrance</option>
+              <option value="Bodycare">Body Care</option>
+            </select>
+
+            <select id="stockFilter" aria-label="Filter by stock">
+              <option value="all">All Stock Levels</option>
+              <option value="In Stock">In Stock</option>
+              <option value="Low Stock">Low Stock</option>
+              <option value="Out of stock">Out of Stock</option>
+            </select>
+          </div>
+
+          <p id="loadingMessage" class="message" role="status" hidden>
+            Loading products...
+          </p>
+
+          <p
+            id="errorMessage"
+            class="message error-message"
+            role="alert"
+            hidden
+          ></p>
+
+          <div class="table-wrapper">
+            <table class="products-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                </tr>
+              </thead>
+
+              <tbody id="productsTableBody">
+                <!-- Product rows will be added with JavaScript. -->
+              </tbody>
+            </table>
+
+            <div id="emptyProducts" class="empty-state" hidden>
+              <i class="fa-solid fa-box-open"></i>
+              <h3>No products found</h3>
+              <p>Products will appear here when they are available.</p>
+            </div>
+          </div>
+        </section>
+
+        <footer class="page-footer">
+          <p>© 2026 Atelier Anya. Store administration.</p>
+        </footer>
+      </main>
+    </div>
+
+    <div class="modal-overlay" id="productModal" hidden>
+      <section
+        class="product-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <div class="modal-heading">
+          <div>
+            <p class="eyebrow">PRODUCT MANAGEMENT</p>
+            <h2 id="modalTitle">Add Product</h2>
+          </div>
+
+          <button
+            type="button"
+            id="closeProductModal"
+            class="close-button"
+            aria-label="Close modal"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <form id="productForm" >
+          <label for="productName">Product Name</label>
+          <input
+            type="text"
+            id="productName"
+            name="name"
+            placeholder="Enter product name"
+            required
+          />
+
+          <label for="productCategory">Category</label>
+          <select id="productCategory" name="category" required>
+            <option value="">Select category</option>
+            <option value="Skincare">Skincare</option>
+            <option value="Makeup">Makeup</option>
+            <option value="Fragrance">Fragrance</option>
+            <option value="Bodycare">Bodycare</option>
+          </select>
+
+          <label for="productPrice">Price (₦)</label>
+          <input
+            type="number"
+            id="productPrice"
+            name="price"
+            min="0"
+            step="0.01"
+            placeholder="Enter price"
+            required
+          />
+
+          <label for="productStock">Stock Quantity</label>
+          <input
+            type="number"
+            id="productStock"
+            name="stock"
+            min="0"
+            step="1"
+            placeholder="Enter stock quantity"
+            required
+          />
+
+          <label for="file">Product Image</label>
+          <input type="file"
+          id="profuctFile"
+          name="file"
+          placeholder="Select a file"
+          >
+
+          <div class="modal-actions">
+            <button
+              type="button"
+              id="cancelProductForm"
+              class="secondary-button"
+            >
+              Cancel
+            </button>
+
+            <button type="submit" class="primary-button">Save Product</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <script src="products.js"></script>
+  </body>
+</html>

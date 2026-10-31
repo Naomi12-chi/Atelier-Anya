@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Atelier Anya</title>
+
+    <link rel="stylesheet" href="checkout.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="checkout-header">
+        <a href="index.html" class="logo">Atelier <span>Anya</span></a>
+
+        <div class="checkout-label">
+            <i class="fa-solid fa-lock"></i>
+            Secure Checkout
+        </div>
+
+        <a href="cart.html" class="back-to-cart">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Cart
+        </a>
+    </header>
+
+
+    <main class="checkout-container">
+
+        <div class="checkout-heading">
+            <h1>Complete Your Order</h1>
+            <p>You're just a few steps away from your beauty essentials.</p>
+        </div>
+
+
+        <div class="checkout-layout">
+
+            <!-- LEFT SIDE: CHECKOUT FORM -->
+            <section class="checkout-form-section">
+
+                <form id="checkoutForm">
+
+                    <!-- CUSTOMER INFORMATION -->
+                    <div class="checkout-card">
+
+                        <div class="section-heading">
+                            <span class="section-number">01</span>
+                            <div>
+                                <h2>Contact Information</h2>
+                                <p>How can we reach you?</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="customerName">Full Name</label>
+                            <input
+                                type="text"
+                                id="customerName"
+                                name="customerName"
+                                placeholder="Enter your full name"
+                                required
+                            >
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="customerEmail">Email Address</label>
+                                <input
+                                    type="email"
+                                    id="customerEmail"
+                                    name="customerEmail"
+                                    placeholder="example@email.com"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="customerPhone">Phone Number</label>
+                                <input
+                                    type="tel"
+                                    id="customerPhone"
+                                    name="customerPhone"
+                                    placeholder="Enter phone number"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SHIPPING INFORMATION -->
+                    <div class="checkout-card">
+
+                        <div class="section-heading">
+                            <span class="section-number">02</span>
+                            <div>
+                                <h2>Delivery Information</h2>
+                                <p>Where should we deliver your order?</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="shippingAddress">Delivery Address</label>
+                            <textarea
+                                id="shippingAddress"
+                                name="shippingAddress"
+                                rows="3"
+                                placeholder="Enter your complete delivery address"
+                                required
+                            ></textarea>
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input
+                                    type="text"
+                                    id="city"
+                                    name="city"
+                                    placeholder="Enter your city"
+                                    required
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input
+                                    type="text"
+                                    id="state"
+                                    name="state"
+                                    placeholder="Enter your state"
+                                    required
+                                >
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="deliveryNote">Delivery Notes (Optional)</label>
+                            <textarea
+                                id="deliveryNote"
+                                name="deliveryNote"
+                                rows="2"
+                                placeholder="Any additional delivery instructions?"
+                            ></textarea>
+                        </div>
+
+                    </div>
+
+
+                    <!-- PAYMENT INFORMATION -->
+                    <div class="checkout-card">
+
+                        <div class="section-heading">
+                            <span class="section-number">03</span>
+                            <div>
+                                <h2>Payment Method</h2>
+                                <p>Choose how you'd like to pay.</p>
+                            </div>
+                        </div>
+
+                        <div class="payment-option">
+
+                            <label class="payment-choice">
+                                <input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="pay_on_delivery"
+                                    required
+                                >
+
+                                <span class="payment-icon">
+                                    <i class="fa-solid fa-truck"></i>
+                                </span>
+
+                                <span class="payment-details">
+                                    <strong>Pay on Delivery</strong>
+                                    <small>Pay when your order arrives.</small>
+                                </span>
+                            </label>
+
+                        </div>
+
+                        <div class="payment-option disabled-option">
+
+                            <label class="payment-choice">
+                                <input
+                                    type="radio"
+                                    name="paymentMethod"
+                                    value="online_payment"
+                                    disabled
+                                >
+
+                                <span class="payment-icon">
+                                    <i class="fa-regular fa-credit-card"></i>
+                                </span>
+
+                                <span class="payment-details">
+                                    <strong>Online Payment</strong>
+                                    <small>Coming soon.</small>
+                                </span>
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+                    <button type="submit" id="placeOrderButton" class="place-order-btn">
+                        Place Order
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                    <p class="secure-note">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Your information is handled securely.
+                    </p>
+
+                </form>
+
+            </section>
+
+
+            <!-- RIGHT SIDE: ORDER SUMMARY -->
+            <aside class="order-summary">
+
+                <div class="summary-heading">
+                    <h2>Your Order</h2>
+                    <span id="checkoutItemCount">0 items</span>
+                </div>
+
+                <!-- PRODUCTS WILL BE RENDERED HERE WITH JAVASCRIPT -->
+                <div id="checkoutItems" class="checkout-items">
+
+                    <p class="empty-checkout">
+                        Your order items will appear here.
+                    </p>
+
+                </div>
+
+
+                <div class="summary-divider"></div>
+
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <strong id="checkoutSubtotal">₦0</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Delivery Fee</span>
+                    <strong id="checkoutShipping">To be confirmed</strong>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div class="summary-total">
+                    <span>Total</span>
+                    <strong id="checkoutTotal">₦0</strong>
+                </div>
+
+                <p class="delivery-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Delivery charges will be confirmed based on your location.
+                </p>
+
+                <div class="summary-footer">
+                    <i class="fa-solid fa-heart"></i>
+                    Thank you for shopping with Atelier Anya.
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+    <footer class="checkout-footer">
+        <p>&copy; 2026 Atelier Anya. All rights reserved.</p>
+    </footer>
+<script src="checkout.js"></script>
+</body>
+</html>

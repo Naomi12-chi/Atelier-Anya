@@ -1,0 +1,805 @@
+/* =========================================================
+   SIGNUP PAGE
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #fff7fa;
+    color: #222;
+}
+
+
+/* =========================================================
+   SIGNUP PAGE CONTAINER
+   ========================================================= */
+
+.signup-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+
+.signup-container {
+    width: 100%;
+    max-width: 1100px;
+    min-height: 680px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    background: white;
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px rgba(225, 46, 122, 0.12);
+}
+
+
+/* =========================================================
+   BRAND SIDE
+   ========================================================= */
+
+.signup-brand {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 45px;
+
+    background:
+        linear-gradient(
+            rgba(225, 46, 122, 0.15),
+            rgba(225, 46, 122, 0.08)
+        ),
+        #f7d6e5;
+
+    overflow: hidden;
+}
+
+
+/* Decorative circles */
+
+.signup-brand::before {
+    content: "";
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.35);
+
+    top: -100px;
+    right: -100px;
+}
+
+
+.signup-brand::after {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    border-radius: 50%;
+
+    background: rgba(225, 46, 122, 0.08);
+
+    bottom: -80px;
+    left: -80px;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.signup-logo {
+    position: relative;
+    z-index: 2;
+
+    text-decoration: none;
+
+    color: #222;
+
+    font-size: 22px;
+    font-weight: 700;
+
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   BRAND CONTENT
+   ========================================================= */
+
+.signup-brand-content {
+    position: relative;
+    z-index: 2;
+
+    max-width: 430px;
+
+    margin-bottom: 80px;
+}
+
+
+.signup-brand-content span {
+    display: inline-block;
+
+    margin-bottom: 18px;
+
+    color: #c72568;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    letter-spacing: 2px;
+}
+
+
+.signup-brand-content h1 {
+    margin-bottom: 20px;
+
+    font-size: 45px;
+    line-height: 1.2;
+
+    font-weight: 700;
+}
+
+
+.signup-brand-content p {
+    max-width: 400px;
+
+    color: #555;
+
+    font-size: 15px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   FORM CONTAINER
+   ========================================================= */
+
+.signup-form-container {
+    padding: 55px 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+/* =========================================================
+   FORM HEADER
+   ========================================================= */
+
+.signup-header {
+    margin-bottom: 30px;
+}
+
+
+.signup-header h2 {
+    margin-bottom: 8px;
+
+    font-size: 30px;
+    font-weight: 700;
+}
+
+
+.signup-header p {
+    color: #777;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   FORM GROUP
+   ========================================================= */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #333;
+
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   INPUT WRAPPER
+   ========================================================= */
+
+.input-wrapper {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+
+.input-wrapper > i {
+    position: absolute;
+    left: 15px;
+
+    color: #b66b89;
+
+    font-size: 14px;
+
+    pointer-events: none;
+}
+
+
+.input-wrapper input {
+    width: 100%;
+
+    padding: 13px 45px;
+
+    border: 1px solid #e5d9de;
+
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: #222;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.input-wrapper input::placeholder {
+    color: #aaa;
+}
+
+
+.input-wrapper input:focus {
+    border-color: #e12e7a;
+
+    box-shadow:
+        0 0 0 3px rgba(225, 46, 122, 0.08);
+}
+
+
+/* =========================================================
+   PASSWORD TOGGLE
+   ========================================================= */
+
+.toggle-password {
+    position: absolute;
+
+    right: 14px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #999;
+
+    cursor: pointer;
+
+    font-size: 15px;
+}
+
+
+.toggle-password:hover {
+    color: #e12e7a;
+}
+
+
+/* =========================================================
+   TERMS
+   ========================================================= */
+
+.terms-group {
+    margin: 8px 0 20px;
+}
+
+
+.terms-group label {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    color: #666;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    cursor: pointer;
+}
+
+
+.terms-group input {
+    margin-top: 4px;
+
+    accent-color: #e12e7a;
+
+    cursor: pointer;
+}
+
+
+.terms-group a {
+    color: #e12e7a;
+
+    text-decoration: none;
+
+    font-weight: 500;
+}
+
+
+.terms-group a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   MESSAGE
+   ========================================================= */
+
+.signup-message {
+    min-height: 20px;
+
+    margin-bottom: 10px;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   SIGNUP BUTTON
+   ========================================================= */
+
+.signup-btn {
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    padding: 14px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #e12e7a;
+
+    color: white;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        opacity 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+
+.signup-btn:hover {
+    transform: translateY(-2px);
+
+    opacity: 0.92;
+
+    box-shadow:
+        0 10px 25px rgba(225, 46, 122, 0.2);
+}
+
+
+.signup-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   LOGIN LINK
+   ========================================================= */
+
+.login-link {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 5px;
+
+    margin-top: 25px;
+
+    font-size: 13px;
+}
+
+
+.login-link p {
+    color: #777;
+}
+
+
+.login-link a {
+    color: #e12e7a;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   BACK TO STORE
+   ========================================================= */
+
+.back-to-store {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    margin-top: 20px;
+
+    color: #777;
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+    transition: color 0.3s ease;
+}
+
+
+.back-to-store:hover {
+    color: #e12e7a;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .signup-container {
+        grid-template-columns: 1fr;
+
+        max-width: 600px;
+    }
+
+
+    .signup-brand {
+        min-height: 350px;
+
+        padding: 35px;
+    }
+
+
+    .signup-brand-content {
+        margin-bottom: 20px;
+    }
+
+
+    .signup-brand-content h1 {
+        font-size: 36px;
+    }
+
+
+    .signup-form-container {
+        padding: 45px 40px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .signup-page {
+        padding: 20px 15px;
+    }
+
+
+    .signup-container {
+        border-radius: 18px;
+    }
+
+
+    .signup-brand {
+        min-height: 300px;
+
+        padding: 30px;
+    }
+
+
+    .signup-brand-content h1 {
+        font-size: 30px;
+    }
+
+
+    .signup-brand-content p {
+        font-size: 13px;
+    }
+
+
+    .signup-form-container {
+        padding: 35px 25px;
+    }
+
+
+    .signup-header h2 {
+        font-size: 25px;
+    }
+
+}
+/* =========================================================
+   LOGIN PAGE
+   ========================================================= */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: #fff5f9;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 480px;
+}
+
+.login-brand {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-brand a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.login-brand h1 {
+    color: var(--primary-pink);
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.login-brand p {
+    color: #666;
+    font-size: 15px;
+}
+
+.login-form {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+}
+
+.login-form h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.login-intro {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"],
+.login-form input[type="text"] {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    font-family: inherit;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.login-form input:focus {
+    border-color: var(--primary-pink);
+}
+
+.password-wrapper {
+    position: relative;
+}
+
+.password-wrapper input {
+    padding-right: 45px !important;
+}
+
+.password-wrapper button {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #777;
+    font-size: 16px;
+}
+
+.login-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.remember-me {
+    display: flex !important;
+    align-items: center;
+    gap: 7px;
+    margin: 0 !important;
+}
+
+.remember-me input {
+    accent-color: var(--primary-pink);
+}
+
+.forgot-password {
+    color: var(--primary-pink);
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.login-message {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 15px;
+    min-height: 20px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    background: var(--primary-pink);
+    color: black;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 22px;
+    color: #666;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: var(--primary-pink);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.guest-browsing {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.guest-browsing span {
+    display: block;
+    margin-bottom: 12px;
+    color: #999;
+    font-size: 13px;
+}
+
+.guest-browsing a {
+    color: #555;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.guest-browsing a:hover {
+    color: var(--primary-pink);
+}
+
+
+/* =========================================================
+   LOGIN MOBILE
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    .login-page {
+        padding: 25px 15px;
+    }
+
+    .login-form {
+        padding: 30px 20px;
+    }
+
+    .login-brand h1 {
+        font-size: 24px;
+    }
+
+    .login-options {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}

@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Customers | Atelier Anya</title>
+
+    <link rel="stylesheet" href="customers.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+
+<body>
+    <div class="admin-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <h2>Atelier Anya</h2>
+                <p>Admin Panel</p>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="admin.html">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <a href="products.html">
+                    <i class="fa-solid fa-box"></i>
+                    <span>Manage Products</span>
+                </a>
+
+                <a href="customers.html" class="active">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Manage Customers</span>
+                </a>
+
+                <a href="orders.html">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span>Manage Orders</span>
+                </a>
+            </nav>
+
+            <button id="logoutButton" class="logout-button" type="button">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <header class="page-header">
+                <div>
+                    <p class="eyebrow">CUSTOMER MANAGEMENT</p>
+                    <h1>Customers</h1>
+                    <p class="subtitle">
+                        View customer accounts and manage their access.
+                    </p>
+                </div>
+
+                <div class="admin-profile">
+                    <span class="admin-avatar">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </span>
+                    <div>
+                        <p>Administrator</p>
+                        <span>Admin Panel</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Customer Overview -->
+            <section class="overview-grid">
+
+                <article class="overview-card">
+                    <div class="card-icon total-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <p>Total Customers</p>
+                        <h2 id="totalCustomers">—</h2>
+                    </div>
+                </article>
+
+                <article class="overview-card">
+                    <div class="card-icon active-icon">
+                        <i class="fa-solid fa-user-check"></i>
+                    </div>
+                    <div>
+                        <p>Active Accounts</p>
+                        <h2 id="activeCustomers">—</h2>
+                    </div>
+                </article>
+
+                <article class="overview-card">
+                    <div class="card-icon disabled-icon">
+                        <i class="fa-solid fa-user-lock"></i>
+                    </div>
+                    <div>
+                        <p>Disabled Accounts</p>
+                        <h2 id="disabledCustomers">—</h2>
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- Customer List -->
+            <section class="customers-section">
+
+                <div class="section-heading">
+                    <div>
+                        <h2>All Customers</h2>
+                        <p>Manage registered customer accounts.</p>
+                    </div>
+                </div>
+
+                <div class="customer-toolbar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input
+                            type="search"
+                            id="customerSearch"
+                            placeholder="Search by email..."
+                            aria-label="Search customers"
+                        >
+                        
+                    </div>
+                    <button id="searchButton">Search</button>
+                    <div id="userInfo"></div>
+
+                </div>
+
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Customer</th>
+                                <th>Email Address</th>
+                                <th>isActive</th>
+                                <th>Role</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="customersTableBody">
+                            <tr>
+                                <td colspan="4" class="table-message">
+                                    Customer records will appear here.
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="customersMessage" class="customers-message" role="status" aria-live="polite" hidden></div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <script src="customers.js"></script>
+</body>
+</html>
