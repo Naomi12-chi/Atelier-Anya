@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>My Orders | Atelier Anya</title>
+
+    <link rel="stylesheet" href="myOrder.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="orders-header">
+      <a href="index.html" class="logo">Atelier Anya</a>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="shop.html">Shop</a>
+        <a href="profile.html">My Account</a>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="orders-page">
+      <section class="orders-intro">
+        <p class="eyebrow">YOUR ACCOUNT</p>
+        <h1>My Orders</h1>
+        <p>Keep track of your purchases and order updates.</p>
+      </section>
+
+      <!-- Order Filters -->
+      <section class="orders-section">
+        <div class="orders-toolbar">
+          <h2>Order History</h2>
+
+          <select id="orderFilter">
+            <option value="all">All Orders</option>
+            <option value="pending">Pending</option>
+            <option value="processing">Processing</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <!-- Loading Message -->
+        <p id="loadingMessage" class="loading-message">
+          Loading your orders...
+        </p>
+
+        <!-- Error Message -->
+        <p id="errorMessage" class="error-message" hidden></p>
+
+        <!-- Orders will be displayed here -->
+        <div id="ordersContainer" class="orders-container"></div>
+
+        <!-- Empty State -->
+        <div id="emptyOrders" class="empty-orders" hidden>
+          <h3>No orders yet</h3>
+          <p>Your purchases will appear here when you place an order.</p>
+          <a href="shop.html" class="shop-button">Explore the Shop</a>
+        </div>
+      </section>
+      <!-- ADD THE NEW SECTION HERE -->
+      <section id="orderDetailsSection" class="order-details-section" hidden>
+        <div class="details-heading">
+          <div>
+            <p class="section-label">ORDER INFORMATION</p>
+            <h2>Order Details</h2>
+          </div>
+
+          <button
+            type="button"
+            id="closeOrderDetails"
+            class="close-details-btn"
+          >
+            Close
+          </button>
+        </div>
+
+        <div class="details-card">
+          <div class="details-top">
+            <div>
+              <p class="detail-label">Order reference</p>
+              <p id="orderReference" class="detail-value"></p>
+            </div>
+
+            <div>
+              <p class="detail-label">Order date</p>
+              <p id="orderDate" class="detail-value"></p>
+            </div>
+          </div>
+
+          <div class="details-status">
+            <div>
+              <p class="detail-label">Order status</p>
+              <span id="orderStatus" class="status-badge"></span>
+            </div>
+
+            <div>
+              <p class="detail-label">Payment status</p>
+
+              <span id="orderPaymentStatus" class="status-badge"></span>
+            </div>
+          </div>
+
+          <div class="details-divider"></div>
+
+          <div class="details-items-section">
+            <h3>Items in this order</h3>
+            <div id="orderDetailsItems"></div>
+          </div>
+
+          <div class="details-divider"></div>
+
+          <div class="shipping-section">
+            <article class="profile-field" data-field="shippingAddress">
+              <div class="field-heading">
+                <h3>Shipping address</h3>
+                <button class="update-btn" type="button">Update</button>
+              </div>
+
+              <p id="orderShippingAddress" class="field-value"></p>
+
+              <form class="edit-form" id="shippingEditForm" hidden>
+                <textarea
+                  id="input-shippingAddress"
+                  name="shippingAddress"
+                  maxlength="500"
+                  placeholder="Enter your delivery address"
+                  required
+                ></textarea>
+
+                <div class="edit-actions">
+                  <button class="save-btn" type="submit">Save Changes</button>
+
+                  <button class="cancel-btn" type="button">Cancel</button>
+                </div>
+              </form>
+            </article>
+          </div>
+
+          <div class="details-total">
+            <span>Total amount</span>
+            <strong id="orderTotal"></strong>
+          </div>
+        </div>
+<div class="cancel-order">
+          <button  id="cancelOrderButton">Cancel Order</button>
+        </div>
+      </section>
+      
+    </main>
+
+    <!-- Footer -->
+    <footer class="orders-footer">
+      <p>&copy; 2026 Atelier Anya. All rights reserved.</p>
+    </footer>
+    <script src="myOrder.js"></script>
+  </body>
+</html>

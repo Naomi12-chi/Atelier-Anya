@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>My Account | Atelier Anya</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="profile.css">
+  <script src="profile.js" defer></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <a href="index.html" class="brand">Atelier <span>Anya</span></a>
+
+    <nav class="top-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="cart.html">My Bag</a>
+    </nav>
+  </header>
+
+  <main class="account-container">
+    <div class="page-heading">
+      <p class="eyebrow">YOUR PERSONAL SPACE</p>
+      <h1>My Account</h1>
+      <p>Everything you need, all in one place.</p>
+    </div>
+
+    <div class="account-layout">
+      <aside class="account-sidebar">
+        <div class="customer-summary">
+          <div class="avatar" id="avatar">A</div>
+          <div>
+            <h2 id="sidebar-name">Loading...</h2>
+            <p id="sidebar-email">Your account</p>
+          </div>
+        </div>
+
+        <nav class="account-nav" aria-label="Account navigation">
+          <a href="profile.html" class="nav-link active">
+            <span class="nav-symbol">01</span> My Profile
+          </a>
+          <a href="myOrder.html" class="nav-link">
+            <span class="nav-symbol">02</span> My Orders
+          </a>
+          <div class="nav-link disabled-link" aria-disabled="true">
+    <span class="nav-symbol">03\</span>
+    Saved Addresses
+    <span class="coming-soon">Coming Soon</span>
+</div>
+
+<div class="nav-link disabled-link" aria-disabled="true">
+    <span class="nav-symbol">04\</span>
+    Account Security
+    <span class="coming-soon">Coming Soon</span>
+</div>
+        </nav>
+
+        <button class="logout-btn" id="logout-btn" type="button">
+          Log out
+        </button>
+      </aside>
+
+      <section class="profile-content">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE DETAILS THAT MATTER</p>
+            <h2>Personal Information</h2>
+            <p>Keep your information up to date.</p>
+          </div>
+        </div>
+
+        <div id="page-message" class="page-message" role="status" hidden></div>
+
+        <div class="profile-fields">
+
+          <article class="profile-field" data-field="name">
+            <div class="field-heading">
+              <label for="input-userName">Full Name</label>
+              <button class="update-btn" type="button">Update</button>
+            </div>
+
+            <p class="field-value" id="value-userName">Loading...</p>
+
+            <form class="edit-form" hidden>
+              <input
+                id="input-name"
+                name="name"
+                type="text"
+                autocomplete="name"
+                maxlength="100"
+                required
+              >
+              <div class="edit-actions">
+                <button class="save-btn" type="submit">Save Changes</button>
+                <button class="cancel-btn" type="button">Cancel</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="profile-field" data-field="email">
+            <div class="field-heading">
+              <label for="input-email">Email Address</label>
+              <button class="update-btn" type="button">Update</button>
+            </div>
+
+            <p class="field-value" id="value-email">Loading...</p>
+
+            <form class="edit-form" hidden>
+              <input
+                id="input-email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                maxlength="254"
+                required
+              >
+              <div class="edit-actions">
+                <button class="save-btn" type="submit">Save Changes</button>
+                <button class="cancel-btn" type="button">Cancel</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="profile-field" data-field="phone">
+            <div class="field-heading">
+              <label for="input-phone">Phone Number</label>
+              <button class="update-btn" type="button">Update</button>
+            </div>
+
+            <p class="field-value" id="value-phone">Not provided</p>
+
+            <form class="edit-form" hidden>
+              <input
+                id="input-phone"
+                name="phone"
+                type="tel"
+                autocomplete="tel"
+                maxlength="25"
+                placeholder="Enter your phone number"
+              >
+              <div class="edit-actions">
+                <button class="save-btn" type="submit">Save Changes</button>
+                <button class="cancel-btn" type="button">Cancel</button>
+              </div>
+            </form>
+          </article>
+
+        </div>
+
+        <div class="privacy-note">
+          <span class="privacy-mark">i</span>
+          <p>Your personal information is used to manage your account and orders.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <a href="index.html" class="brand">Atelier <span>Anya</span></a>
+    <p>A little luxury, every day.</p>
+    <small>&copy; <span id="year"></span> Atelier Anya</small>
+  </footer>
+</body>
+</html>

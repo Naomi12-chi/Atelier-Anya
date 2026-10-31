@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Dashboard | Atelier Anya</title>
+
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <div class="admin-layout">
+
+        <!-- Sidebar navigation -->
+        <aside class="sidebar">
+
+            <a href="index.html" class="brand">
+                <span class="brand-name">ATELIER ANYA</span>
+                <span class="brand-subtitle">STORE MANAGEMENT</span>
+            </a>
+
+            <div class="nav-section">
+                <p class="nav-heading">WORKSPACE</p>
+
+                <nav class="sidebar-nav" aria-label="Admin navigation">
+
+                    <a href="index.html"
+                       class="nav-link active"
+                       aria-current="page">
+                        <span class="nav-icon">⌂</span>
+                        <span>Overview</span>
+                    </a>
+
+                    <a href="orders.html" class="nav-link">
+                        <span class="nav-icon">▤</span>
+                        <span>Orders</span>
+                    </a>
+
+                    <a href="products.html" class="nav-link">
+                        <span class="nav-icon">◇</span>
+                        <span>Products</span>
+                    </a>
+
+                    <a href="customers.html" class="nav-link">
+                        <span class="nav-icon">♙</span>
+                        <span>Customers</span>
+                    </a>
+
+                </nav>
+            </div>
+
+            <div class="sidebar-bottom">
+                <p class="nav-heading">STORE</p>
+
+                <a href="../index.html" class="nav-link">
+                    <span class="nav-icon">↗</span>
+                    <span>View storefront</span>
+                </a>
+
+                <button type="button" class="nav-link logout-button" id="logoutButton">
+                    <span class="nav-icon">⇥</span>
+                    <span>Log out</span>
+                </button>
+            </div>
+
+        </aside>
+
+
+        <!-- Main dashboard area -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <div class="breadcrumb">
+                    <span>Atelier Anya</span>
+                    <span class="breadcrumb-divider">/</span>
+                    <span class="current-page">Overview</span>
+                </div>
+
+                <div class="admin-profile">
+                    <div class="avatar" aria-hidden="true">A</div>
+
+                    <div class="admin-info">
+                        <span class="admin-name">Administrator</span>
+                        <span class="admin-role">Store management</span>
+                    </div>
+                </div>
+            </header>
+
+
+            <section class="page-content">
+
+                <div class="page-heading">
+                    <div>
+                        <p class="eyebrow">YOUR STORE AT A GLANCE</p>
+                        <h1>Dashboard overview</h1>
+                        <p class="page-description">
+                            Monitor your store and manage daily operations.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- Summary cards -->
+                <section class="stats-grid" aria-label="Store summary">
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Total orders</span>
+                            <span class="stat-icon">▤</span>
+                        </div>
+                        <p class="stat-value" id="totalOrders">—</p>
+                        <p class="stat-note">Orders in your database</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Total products</span>
+                            <span class="stat-icon">◇</span>
+                        </div>
+                        <p class="stat-value" id="totalProducts">—</p>
+                        <p class="stat-note">Products in your catalogue</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Customers</span>
+                            <span class="stat-icon">♙</span>
+                        </div>
+                        <p class="stat-value" id="totalCustomers">—</p>
+                        <p class="stat-note">Registered customer accounts</p>
+                    </article>
+
+                    <article class="stat-card">
+                        <div class="stat-top">
+                            <span class="stat-label">Paid revenue</span>
+                            <span class="stat-icon">₦</span>
+                        </div>
+                        <p class="stat-value" id="paidRevenue">—</p>
+                        <p class="stat-note">Based on verified payments</p>
+                    </article>
+
+                </section>
+
+
+                <!-- Recent orders -->
+                <section class="content-card">
+
+                    <div class="section-header">
+                        <div>
+                            <h2>Recent orders</h2>
+                            <p>Review orders and their current statuses.</p>
+                        </div>
+
+                        <a href="orders.html" class="text-link">
+                            View all orders →
+                        </a>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Order reference</th>
+                                    <th>Customer</th>
+                                    <th>Total</th>
+                                    <th>Payment</th>
+                                    <th>Order status</th>
+                                    <th>shipping Address</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="recentOrderBody">
+                                <tr>
+                                    <td colspan="6" class="empty-state">
+                                        loading recent orders...
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+
+
+                <!-- Inventory overview -->
+                <section class="content-card inventory-card">
+
+                    <div class="section-header">
+                        <div>
+                            <h2>Inventory overview</h2>
+                            <p>Keep an eye on product availability.</p>
+                        </div>
+
+                        <a href="products.html" class="text-link">
+                            Manage products →
+                        </a>
+                    </div>
+
+                    <div class="inventory-placeholder" id="inventoryOverview">
+                        <span class="inventory-symbol">◇</span>
+                        <div>
+                            <h3>Inventory monitoring</h3>
+                            <p>
+                                Low-stock products and stock levels
+                                will appear here.
+                            </p>
+                        </div>
+                    </div>
+
+                </section>
+
+                <footer class="dashboard-footer">
+                    Atelier Anya · Store administration
+                </footer>
+
+            </section>
+
+        </main>
+
+    </div>
+<script src="admin.js"></script>
+</body>
+</html>
