@@ -77,7 +77,7 @@
              localStorage.setItem("token", data.token);
 
              if (data.user && data.user.Id) {
-                 localStorage.setItem("Id", data.user.Id);
+                 localStorage.setItem("Id", data.Id);
              }
 
              if (data.user && data.user.role) {
