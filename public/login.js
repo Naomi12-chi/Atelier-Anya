@@ -76,15 +76,14 @@
              // Save authentication details
              localStorage.setItem("token", data.token);
 
-             if (data.user && data.user.Id) {
+             
                  localStorage.setItem("Id", data.Id);
-             }
+             
 
-             if (data.user && data.user.role) {
-                 localStorage.setItem("role", data.user.role);
-             } else if (data.role) {
+             
+              
                  localStorage.setItem("role", data.role);
-             }
+             
 
              loginMessage.textContent = "Login successful!";
 
