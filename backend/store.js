@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../public")));
 const MongoDB = process.env.MONGODB_URI
-mongoose.connect("mongodb://localhost:27017/myEcommerce")
+mongoose.connect(MongoDB)
 
 .then(() => {
   console.log("Database Connected")  
