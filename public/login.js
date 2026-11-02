@@ -76,8 +76,8 @@
              // Save authentication details
              localStorage.setItem("token", data.token);
 
-             if (data.user && data.user._id) {
-                 localStorage.setItem("Id", data.user._id);
+             if (data.user && data.user.Id) {
+                 localStorage.setItem("Id", data.user.Id);
              }
 
              if (data.user && data.user.role) {
