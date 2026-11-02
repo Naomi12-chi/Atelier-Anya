@@ -1,3 +1,40 @@
+// Use centralized auth for admin
+async function ensureAdminAuth() {
+    if (window.Auth) {
+        const ok = await window.Auth.requireAuth({ requireAdmin: true });
+        return ok;
+    }
+    const token = localStorage.getItem("token");
+    if (!token) {
+        window.location.href = "../login.html";
+        return false;
+    }
+    try {
+        const response = await fetch('/user/adminCheck', {
+            method: "GET",
+            headers: {
+                Authorization: `bearer ${token}` ,
+                "Content-Type": "application/json",
+            },
+        });
+        if (response.status === 401 || response.status === 403) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("Id");
+            localStorage.removeItem("role");
+            window.location.replace("../login.html");
+            return false;
+        }
+        if (!response.ok) {
+            window.location.href = "../login.html";
+            return false;
+        }
+        return true;
+    } catch (error) {
+        window.location.href = "../login.html";
+        return false;
+    }
+}
+
 const logoutButton = document.getElementById("logoutButton");
 const totalOrders = document.getElementById("totalOrders");
 const totalProducts = document.getElementById("totalProducts");
@@ -44,10 +81,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //log out
 logoutButton.addEventListener("click", () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("Id");
-  localStorage.removeItem("role");
-
+  if (window.Auth) {
+    window.Auth.clearAuthData();
+  } else {
+    localStorage.removeItem("token");
+    localStorage.removeItem("Id");
+    localStorage.removeItem("role");
+  }
   window.location.href = "../login.html";
 });
 
@@ -180,3 +220,6 @@ allOrders();
 allProducts();
 allCustomers();
 getRecentOrders();
+
+
+

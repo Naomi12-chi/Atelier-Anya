@@ -1,3 +1,24 @@
+// Use centralized auth
+function ensureAuthForProfile() {
+    if (window.Auth) {
+        const token = window.Auth.getToken();
+        const id = window.Auth.getUserId();
+        if (!token || !id) {
+            window.Auth.savePendingAction({ type: 'VIEW_PROFILE', returnUrl: window.location.href });
+            window.Auth.redirectToLogin(window.location.href);
+            return false;
+        }
+        return { token, id };
+    }
+    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("Id");
+    if (!token || !id) {
+        window.location.replace("login.html");
+        return false;
+    }
+    return { token, id };
+}
+
 
 const profileContainer = document.getElementById("profileContainer");
 const logOut = document.getElementById("logout-btn");
@@ -9,9 +30,13 @@ let activeEditor = null;
 
 // LOGOUT
 logOut.addEventListener("click", () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("Id");
-
+    if (window.Auth) {
+        window.Auth.clearAuthData();
+    } else {
+        localStorage.removeItem("token");
+        localStorage.removeItem("Id");
+        localStorage.removeItem("role");
+    }
     window.location.href = "login.html";
 });
 
@@ -22,13 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // GET LOGGED-IN USER
 async function getMyAccount() {
-    const token = localStorage.getItem("token");
-    const id = localStorage.getItem("Id");
-
-    if (!token || !id) {
-        window.location.replace("login.html");
-        return;
-    }
+    const auth = ensureAuthForProfile();
+    if (!auth) return;
+    const token = auth.token;
+    const id = auth.id;
 
     try {
         const response = await fetch(`/user/myAccount/${id}`, {
@@ -272,3 +294,5 @@ console.log(data)
         saveButton.textContent = "Save Changes";
     }
 }
+
+

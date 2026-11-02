@@ -1,6 +1,5 @@
 const Product = require("../models/product");
 const { verifyToken } = require("../middlewares/verify");
-// const { post } = require("../routes/productRoute");
 const { getBucket } = require("../middlewares/gridfs");
 const { objectId } = require("mongodb");
 const mongoose = require("mongoose");
@@ -16,29 +15,54 @@ const addProduct = async (req, res) => {
       return res.status(500).json({ message: "GridFS not initilized" });
     }
 
-    if (!req.file) {
-      return res.status(400).json({
-        message: "No file uploaded",
-      });
-    }
-
     if (!req.body) return res.status(401).json("Fill in product's credentials");
     if (req.user.role !== "admin")
       return res.status(401).json("Unauthorized access, Admins only");
-    const uploadStream = bucket.openUploadStream(req.file.originalname, {
-      metadata: {
-        contentType: req.file.mimetype,
-      },
-    });
+    
+    let finalProductImage = productImage || '';
+    
+    if (req.file) {
+      const uploadStream = bucket.openUploadStream(req.file.originalname, {
+        metadata: {
+          contentType: req.file.mimetype,
+        },
+      });
 
-    uploadStream.end(req.file.buffer);
-    uploadStream.on("finish", async () => {
+      uploadStream.end(req.file.buffer);
+      uploadStream.on("finish", async () => {
+        try {
+          finalProductImage = finalProductImage || '/products/image/' + uploadStream.id;
+          const newProduct = await Product.create({
+            name,
+            price,
+            category,
+            productImage: finalProductImage,
+            stock,
+            userId: req.user.userId,
+          });
+          console.log(newProduct);
+          res.status(201).json("Product successfully added");
+        } catch (err) {
+          console.error(err.message);
+          res.status(500).json({
+            message: err.message,
+          });
+        }
+      });
+
+      uploadStream.on("error", (err) => {
+        console.error("GridFS upload error:", err);
+        return res.status(500).json({
+          message: "File upload Failed",
+        });
+      });
+    } else {
       try {
         const newProduct = await Product.create({
           name,
           price,
           category,
-          productImage,
+          productImage: finalProductImage,
           stock,
           userId: req.user.userId,
         });
@@ -50,17 +74,7 @@ const addProduct = async (req, res) => {
           message: err.message,
         });
       }
-    });
-
-    uploadStream.on("error", (err) => {
-      console.error("GridFS upload error:", err);
-
-      return res.status(500).json({
-        message: "File upload Failed",
-      });
-    });
-
-    // console.log(req.user.userId)
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json("Internal server error");
@@ -139,7 +153,6 @@ const updateStock = async (req, res) => {
     if (!product) return res.status(404).json("Product not found");
     console.log(product)
     product.stock += newStock;
-    
     product.save();
     res.status(201).json("Product stock updated successfully");
   } catch (err) {
@@ -148,18 +161,56 @@ const updateStock = async (req, res) => {
   }
 };
 
-
 // view total products number by admin
 const viewProducts = async (req, res) => {
-
   try {
     if (req.user.role !== "admin") return res.status(403).json("Admins only")
     const allProducts = await Product.find();
-  res.status(200).json(allProducts)
+    res.status(200).json(allProducts)
   } catch(err) {
     res.status(500).json("Internal server error")
   }
-}
+};
+
+// Serve image from GridFS
+const getProductImage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { getBucket } = require("../middlewares/gridfs");
+    const bucket = getBucket();
+    if (!bucket) {
+      return res.status(500).json({ message: "GridFS not initialized" });
+    }
+    const mongoose = require("mongoose");
+    let _id;
+    try {
+      _id = new mongoose.Types.ObjectId(id);
+    } catch (e) {
+      return res.status(404).json({ message: "Image not found" });
+    }
+    
+    const files = await bucket.find({ _id: _id }).toArray();
+    if (!files || files.length === 0) {
+      return res.status(404).json({ message: "Image not found" });
+    }
+    
+    const file = files[0];
+    const contentType = (file.metadata && file.metadata.contentType) ? file.metadata.contentType : "image/jpeg";
+    res.set("Content-Type", contentType);
+    res.set("Cache-Control", "public, max-age=31536000");
+    
+    const downloadStream = bucket.openDownloadStream(_id);
+    downloadStream.on("error", (err) => {
+      console.error(err);
+      res.status(404).end();
+    });
+    downloadStream.pipe(res);
+  } catch (err) {
+    console.error(err);
+    res.status(404).json({ message: "Image not found" });
+  }
+};
+
 module.exports = {
   addProduct,
   getProducts,
@@ -167,5 +218,6 @@ module.exports = {
   updatePrice,
   deleteProduct,
   updateStock,
-  viewProducts
+  viewProducts,
+  getProductImage
 };

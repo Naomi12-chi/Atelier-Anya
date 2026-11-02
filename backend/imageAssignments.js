@@ -1,0 +1,38 @@
+
+const imageAssignments = {
+    "Rose Silk Cleansing Balm": "rosecleanser.jpg",
+    "Golden Hour Vitamin C Serum": "vitamincserum.jpg",
+    "Blush Cloud Whipped Moisturizer": "cloudmoisturizer.jpg",
+    "Petal Dew Balancing Toner": "petaltoner.jpg",
+    "Rose Clay Detox Mask": "clayrosemask.jpg",
+    "Sugar Bloom Gentle Exfoliant": "sugarexfoliant.jpg",
+    "Gilded Eye Renewal Cream": "goldeyecream.jpg",
+    "Cream Veil SPF 50 Shield": "spfshield.jpg",
+    "Rosier Radiance Facial Oil": "radiancefacialoil.jpg",
+    "Velvet Night Lip Kit": "velvetlip.png",
+    "Blush Kiss High-Shine Gloss": "blushkissgloss.jpg",
+    "Rose Noir Velvet Lipstick": "rosenoirlipstick.jpg",
+    "Precision Petal Lip Liner": "petallipliner.jpg",
+    "Cream Silk Second-Skin Foundation": "silkfoundation.jpg",
+    "Gold Standard Full Coverage Concealer": "goldconcealer.jpg",
+    "Blush Bloom Powder Flush": "blushbloom.jpg",
+    "Champagne Glow Highlighter": "champagnehighlighter.jpg",
+    "Sunlit Terracotta Bronzer": "terracottabronzer.jpg",
+    "Cream Finish Translucent Powder": "translucentpowder.jpg",
+    "Dewdrop All-Night Setting Mist": "dewdropmist.jpg",
+    "Noir Lash Volumizing Mascara": "noirlashmascara.jpg",
+    "Ink Petal Precision Eyeliner": "inkeyeliner.jpg",
+    "Rose Gold Eyeshadow Palette": "rosegoldpalette.jpg",
+    "Amber Bloom Eau de Parfum": "amberparfum.png",
+    "Gilded Bloom Eau de Parfum": "gildedbloomedp.jpg",
+    "Blush Petal Body Mist": "blushpetalmist.jpg",
+    "Golden Amber Oil Perfume": "amberoilperfume.jpg",
+    "Cream Vanilla Body Spray": "vanillabodyspray.jpg",
+    "Rose Musk Perfume Oil": "rosemuskoil.jpg",
+    "Petal Roll-On Fragrance": "petalrollon.jpg",
+    "Whipped Cream Body Lotion": "whippedlotion.jpg",
+    "Rose Gold Shea Body Butter": "sheabodybutter.jpg",
+    "Sugar Rose Polishing Scrub": "sugarrosescrub.jpg"
+};
+
+module.exports = imageAssignments;

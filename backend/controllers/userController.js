@@ -45,7 +45,7 @@ const loginUser = async (req, res) => {
         role: loggedinUser.role,
       },
       KEY,
-      { expiresIn: "10m" },
+      { expiresIn: "30m" },
     );
     return res.status(200).json({ token: token, Id: loggedinUser._id, role: loggedinUser.role });
   } catch (error) {

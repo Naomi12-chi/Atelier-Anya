@@ -1,208 +1,126 @@
-const form = document.querySelector("#signupForm");
-const signupMessage = document.querySelector("#signupMessage");
-const togglePassword = document.querySelector("#togglePassword");
-const toggleConfirmPassword = document.querySelector("#toggleConfirmPassword");
- const loginForm = document.getElementById("loginForm");
-// const signupPassword = document.querySelector("#signupPassword");
-// const confirmPassword = document.querySelector("#confirmPassword");
+// ========================================
+// SIGNUP FORM
+// ========================================
 
-// sign up into atelier anya
-// form.addEventListener("submit", async (event) => {
-//   event.preventDefault();
-//   const email = document.getElementById("email").value;
-//   const password = document.getElementById("password").value;
-//   const fullName = document.getElementById("fullName").value;
+const signupForm = document.getElementById("signupForm");
 
-//   const response = await fetch("/user", {
-//     method: "POST",
-//     headers: {
-//         "Content-Type": "application/json"
-//     },
-//     body: JSON.stringify({
-//         email: email,
-//         password: password,
-//         name: fullName
-//     })
-//   });
+if (signupForm) {
+    signupForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
 
-//   const data = await response.json();
-//   console.log(data);
-//   form.reset();
-//   alert("Your account has been created successfully, proceed to log in")
+        const fullNameInput = document.getElementById("fullName");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const termsInput = document.getElementById("terms");
+        const signupMessage = document.getElementById("signupMessage");
 
-//   if (togglePassword) {
-//     togglePassword.addEventListener("click", () => {
-//         if (password.type === "password") {
-//             password.type = "text";
-//             togglePassword.innerHTML =
-//                 '<i class="fa-regular fa-eye-slash"></i>';
-//         } else {
-//             password.type = "password";
-//             togglePassword.innerHTML =
-//                 '<i class="fa-regular fa-eye"></i>';
-//         }
-//     });
-// }
-// });
+        const fullName = fullNameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
 
-// if (toggleConfirmPassword) {
-//     toggleConfirmPassword.addEventListener("click", () => {
-//         if (confirmPassword.type === "password") {
-//             confirmPassword.type = "text";
-//             toggleConfirmPassword.innerHTML ='<i class="fa-regular fa-eye-slash"></i>';
-//         } else {
-//             confirmPassword.type = "password";
-//             toggleConfirmPassword.innerHTML ='<i class="fa-regular fa-eye"></i>';
-//         }
-//     });
-// }
-// if (signupForm) {
-//     form.addEventListener("submit", (event) => {
-//         event.preventDefault();
-//         const firstName = document.querySelector("#firstName").value.trim();
-//         const lastName = document.querySelector("#lastName").value.trim();
-//         const email = document.querySelector("#signupEmail").value.trim();
-//         const password = signupPassword.value;
-//         const confirmPasswordValue = confirmPassword.value;
-//         signupMessage.textContent = "";
-//         if (
-//             !firstName ||
-//             !lastName ||
-//             !email ||
-//             !password ||
-//             !confirmPasswordValue
-//         ) {
-//             signupMessage.textContent =
-//                 "Please fill in all fields.";
-//             signupMessage.style.color = "#d62828";
-//             return;
-//         }
-//         const emailPattern =
-//             /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-//         if (!emailPattern.test(email)) {
-
-//             signupMessage.textContent = "Please enter a valid email address.";
-//             signupMessage.style.color = "#d62828";
-//             return;
-//         }
-//         if (password.length < 8) {
-//             signupMessage.textContent = "Password must be at least 8 characters.";
-//             signupMessage.style.color = "#d62828";
-//             return;
-//         }
-//         if (password !== confirmPasswordValue) {
-//             signupMessage.textContent = "Passwords do not match.";
-//             signupMessage.style.color = "#d62828";
-//             return;
-//         }
-//         signupMessage.textContent = "Your information is valid. Account creation will be connected to the server soon.";
-//         signupMessage.style.color = "#2e8b57";
-//     });
-// }
-// // =========================
-// // LOGIN to existing account
-
-// // =========================
-
-loginForm.addEventListener("submit", async(event )=> {
-    event.preventDefault()
-    console.log("ran")
-
- const email = document.getElementById("loginEmail").value;
- const password = document.getElementById("loginPassword").value;
- const response = await fetch ("/user/login", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        email, password
-    })
-    
- })
- console.log(response)
-const data = await response.json();
- const loginMessage = document.querySelector("#loginMessage");
-
-const toggleLoginPassword = document.querySelector("#toggleLoginPassword");
-
-if (toggleLoginPassword) {
-
-    toggleLoginPassword.addEventListener("click", () => {
-
-        if (loginPassword.type === "password") {
-
-            loginPassword.type = "text";
-
-            toggleLoginPassword.innerHTML =
-                '<i class="fa-regular fa-eye-slash"></i>';
-
-        } else {
-
-            loginPassword.type = "password";
-
-            toggleLoginPassword.innerHTML =
-                '<i class="fa-regular fa-eye"></i>';
-
+        if (!fullName || !email || !password) {
+            showSignupMessage("Please complete all required fields.", false);
+            return;
         }
 
-    });
+        if (!termsInput.checked) {
+            showSignupMessage("Please agree to the Terms & Conditions.", false);
+            return;
+        }
 
+        const submitButton = signupForm.querySelector('button[type="submit"]');
+
+if (submitButton) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Creating Account...";
 }
-localStorage.setItem("token", data.token)
-localStorage.setItem("Id", data.Id)
-localStorage.setItem("role", data.role)
-})
+        try {
+            const response = await fetch("/user/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: fullName,
+                    email,
+                    password
+                })
+            });
 
-//         // =========================
-//         // CLEAR MESSAGE
-//         // =========================
+            const data = await response.json();
 
-//         loginMessage.textContent = "";
+            if (!response.ok) {
+                throw new Error(
+                    data.message || "Unable to create your account."
+                );
+            }
+
+            showSignupMessage(
+                "Account created successfully! Redirecting to login...",
+                true
+            );
+
+            signupForm.reset();
+
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1500);
+
+        } catch (error) {
+            console.error("Signup error:", error);
+
+            showSignupMessage(
+                error.message || "Something went wrong. Please try again.",
+                false
+            );
+
+        }
+            finally {
+    if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.innerHTML = `
+            Create Account
+            <i class="fa-solid fa-arrow-right"></i>
+        `;
+    }
+}
+        
+    });
+}
 
 
-//         // =========================
-//         // CHECK FIELDS
-//         // =========================
+// ========================================
+// SIGNUP MESSAGE
+// ========================================
 
-//         if (!email || !password) {
+function showSignupMessage(message, success) {
+    const signupMessage = document.getElementById("signupMessage");
 
-//             loginMessage.textContent =
-//                 "Please enter your email and password.";
-
-//             loginMessage.style.color = "#d62828";
-
-//             return;
-//         }
-
-
-//         // =========================
-//         // CHECK EMAIL
-//         // =========================
-
-//         const emailPattern =
-//             /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-//         if (!emailPattern.test(email)) {
-
-//             loginMessage.textContent =
-//                 "Please enter a valid email address.";
-
-//             loginMessage.style.color = "#d62828";
-
-//             return;
-//         }
+    if (signupMessage) {
+        signupMessage.textContent = message;
+        signupMessage.style.color = success ? "#2e8b57" : "#d62828";
+    } else {
+        alert(message);
+    }
+}
 
 
-//         // =========================
-//         // FRONTEND VALIDATION COMPLETE
-//         // =========================
+// ========================================
+// PASSWORD VISIBILITY TOGGLE
+// ========================================
 
-//         loginMessage.textContent =
-//             "Your information is valid. Login will be connected to the server soon.";
+const togglePassword = document.getElementById("togglePassword");
 
-//         loginMessage.style.color = "#2e8b57";
+if (togglePassword) {
+    togglePassword.addEventListener("click", () => {
+        const passwordInput = document.getElementById("password");
 
-//     });
+        const isPasswordHidden = passwordInput.type === "password";
 
-// }
+        passwordInput.type = isPasswordHidden ? "text" : "password";
+
+        togglePassword.innerHTML = isPasswordHidden
+            ? '<i class="fa-regular fa-eye-slash"></i>'
+            : '<i class="fa-regular fa-eye"></i>';
+    });
+}
