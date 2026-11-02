@@ -124,3 +124,4 @@ if (togglePassword) {
             : '<i class="fa-regular fa-eye"></i>';
     });
 }
+
